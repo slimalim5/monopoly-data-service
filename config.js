@@ -1,12 +1,13 @@
+require('dotenv').config(); // Load environment variables from .env file
 const pgp = require('pg-promise')();
 
 const db = pgp({
-  host: 'monopoly-db.postgres.database.azure.com',  // PGHOST
-  port: 5432,  // PGPORT
-  database: 'monopoly',  // PGDATABASE
-  user: 'alimdarmenov',  // PGUSER
-  password: 'Kazakhstan12!@',  // Replace with your actual password
-  ssl: { rejectUnauthorized: false }  // Ensure SSL is set correctly
+  host: process.env.PGHOST,
+  port: process.env.PGPORT,
+  database: process.env.PGDATABASE,
+  user: process.env.PGUSER,
+  password: process.env.PGPASSWORD,
+  ssl: { rejectUnauthorized: false }
 });
 
 module.exports = db;
