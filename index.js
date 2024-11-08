@@ -27,8 +27,8 @@ app.get('/players', async (req, res) => {
     console.log("Players fetched:", players);
     res.json(players);
   } catch (error) {
-    console.error("Error fetching players:", error.message); // Log specific error message
-    console.error("Full error details:", error); // Log full error object for deeper insights
+    console.error("Error fetching players:", error.message);
+    console.error("Full error details:", error);
     res.status(500).send('Error fetching players');
   }
 });
@@ -43,6 +43,20 @@ app.get('/players/:id', async (req, res) => {
   } catch (error) {
     console.error("Error fetching player:", error.message);
     res.status(500).send('Error fetching player');
+  }
+});
+
+// Retrieve player game details from the view
+app.get('/player-game-details', async (req, res) => {
+  try {
+    console.log("Fetching player game details...");
+    const details = await db.any('SELECT * FROM PlayerGameDetailsView');
+    console.log("Player game details fetched:", details);
+    res.json(details);
+  } catch (error) {
+    console.error("Error fetching player game details:", error.message);
+    console.error("Full error details:", error);
+    res.status(500).send('Error fetching player game details');
   }
 });
 
